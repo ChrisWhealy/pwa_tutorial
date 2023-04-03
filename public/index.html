@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Food Ninja</title>
 
-  <!-- materialize icons, css & js -->
+  <!-- Materialize icons, CSS & JS -->
   <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
   <link type="text/css" href="/css/styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -80,16 +80,17 @@
   </div>
 
   <script type="module">
-    import { snapshotHandler } from "/js/db.js"
+    import {
+      snapshotHandler,
+      addRecipeHandler,
+      deleteRecipeHandler
+    } from "/js/db.js"
 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js"
     import {
       enableIndexedDbPersistence,
       onSnapshot,
       collection,
-      doc,
-      addDoc,
-      deleteDoc,
       getFirestore,
     } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-firestore.js"
 
@@ -119,32 +120,9 @@
 
     const unsub = onSnapshot(collection(db, 'recipes'), snapshotHandler)
 
-    // Add recipe
-    const addRecipeForm = document.getElementById('add-recipe')
-    addRecipeForm.addEventListener('submit', evt => {
-      evt.preventDefault()
-
-      addDoc(collection(db, 'recipes'), {
-        title: addRecipeForm.title.value,
-        ingredients: addRecipeForm.ingredients.value
-      })
-        .then(() => {
-          addRecipeForm.title.value = ''
-          addRecipeForm.ingredients.value = ''
-        })
-        .catch(err => console.error('ERROR: Unable to add new recipe/n', err))
-    })
-
-    // Delete recipe
-    const recipeContainer = document.querySelector('.recipes')
-    recipeContainer.addEventListener('click', evt => {
-      if (evt.target.tagName === "I") {
-        const id = evt.target.getAttribute("data-id")
-        deleteDoc(doc(db, 'recipes', id))
-          .then(() => console.log(`Recipe ${id} deleted`))
-          .catch(err => console.error(`ERROR: Unable to delete document ${id}`))
-      }
-    })
+    // Event handlers for recipe actions
+    document.getElementById('add-recipe').addEventListener('submit', addRecipeHandler(db))
+    document.querySelector('.recipes').addEventListener('click', deleteRecipeHandler(db))
   </script>
 </body>
 

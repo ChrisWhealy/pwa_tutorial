@@ -1,5 +1,5 @@
 const appName = 'food-ninja'
-const appVersion = 'v2'
+const appVersion = 'v1'
 
 const staticCacheName = `${appName}-static-${appVersion}`
 const dynamicCacheName = `${appName}-dynamic-${appVersion}`
