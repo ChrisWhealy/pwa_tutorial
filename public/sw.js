@@ -97,7 +97,7 @@ self.addEventListener('install', evt => {
 })
 
 self.addEventListener('activate', evt => {
-  // Clean this application's up old caches
+  // Clean up this application's old caches
   evt.waitUntil(
     caches
       .keys()
@@ -110,6 +110,10 @@ self.addEventListener('activate', evt => {
 })
 
 self.addEventListener('fetch', evt => {
+  // To cache, or not to cache; that is the question...
+  // Whether 'tis nobler to suffer the slings and arrows of outrageous network requests,
+  // Or to take up arms against a sea of out of date cache content
+  // and by opposing refresh them?
   if (noCacheUrls.filter(urlFragment => evt.request.url.indexOf(urlFragment) !== -1).length === 0) {
     evt.respondWith(
       caches
