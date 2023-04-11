@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Food Ninja</title>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- iOS Support -->
+  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+  <meta name="theme-color" content="#aa7700">
+
+  <!-- Materialize -->
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet prefetch" href="/css/materialize.css">
+  <link rel="stylesheet prefetch" href="/css/styles.css">
+  <script src="/js/materialize.js"></script>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <script type="module" src="/js/ui.mjs"></script>
+  <script type="module" src="/js/app.mjs" defer></script>
+</head>
+
+<body class="grey lighten-4">
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">Food<span>Ninja</span></a>
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+      </span>
+    </div>
+  </nav>
+
+  <!-- side nav -->
+  <ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">FOODNINJA</a></li>
+    <li><a href="/" class="waves-effect">Home</a></li>
+    <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a href="/pages/contact.html" class="waves-effect">
+        <i class="material-icons">mail_outline</i>Contact</a>
+    </li>
+  </ul>
+
+  <!-- recipes -->
+  <div class="recipes container grey-text text-darken-1">
+    <h6 class="center">Ninja Recipes</h6>
+  </div>
+
+  <div class="center">
+    <a class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form">
+      <i class="material-icons">add</i>
+    </a>
+  </div>
+
+  <!-- add recipe side nav -->
+  <div id="side-form" class="sidenav side-form">
+    <form id="add-recipe" class="add-recipe container section">
+      <h6>New Recipe</h6>
+      <div class="divider"></div>
+      <div class="input-field">
+        <input placeholder="e.g. Ninja soup" id="title" type="text" class="validate">
+        <label for="title">Recipe Title</label>
+      </div>
+      <div class="input-field">
+        <input placeholder="e.g. Tofu, mushroom, garlic" id="ingredients" type="text" class="validate">
+        <label for="ingredients">Ingredients</label>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module">
+    (async () => {
+      const firebaseUrl = 'https://www.gstatic.com/firebasejs/'
+      const firebaseVersion = '9.19.0'
+      const firebaseApp = `${firebaseUrl}${firebaseVersion}/firebase-app.js`
+      const firebaseFirestore = `${firebaseUrl}${firebaseVersion}/firebase-firestore.js`
+
+      const { initializeApp, PersistentLocalCache } = await import(firebaseApp)
+      const { enableIndexedDbPersistence, onSnapshot, collection, initializeFirestore } = await import(firebaseFirestore)
+      const { snapshotHandler, addRecipeHandler, deleteRecipeHandler } = await import('/js/db.mjs')
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCNVqRios0_f1jr2eLM9ICjULTCD9zKvX0",
+        authDomain: "food-ninja-pwa-bfe90.firebaseapp.com",
+        projectId: "food-ninja-pwa-bfe90",
+        storageBucket: "food-ninja-pwa-bfe90.appspot.com",
+        messagingSenderId: "496112780511",
+        appId: "1:496112780511:web:d1230c5eed3680161c156a",
+        measurementId: "G-9P0EWHSLJ2",
+      }
+
+      const app = initializeApp(firebaseConfig)
+      const db = initializeFirestore(app, {
+        localCache: PersistentLocalCache,
+      })
+
+      // Register snapshot handler
+      onSnapshot(collection(db, 'recipes'), snapshotHandler)
+
+      // Event handlers for recipe actions
+      document.getElementById('add-recipe').addEventListener('submit', addRecipeHandler(db))
+      document.querySelector('.recipes').addEventListener('click', deleteRecipeHandler(db))
+    })()
+  </script>
+</body>
+
+</html>

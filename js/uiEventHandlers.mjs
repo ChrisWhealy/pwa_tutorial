@@ -1,18 +1,4 @@
-const recipes = document.querySelector('.recipes')
-
-document.addEventListener(
-  'DOMContentLoaded',
-  () => {
-    // nav menu
-    const menus = document.querySelectorAll('.side-menu')
-    M.Sidenav.init(menus, { edge: 'right' })
-
-    // add recipe form
-    const forms = document.querySelectorAll('.side-form')
-    M.Sidenav.init(forms, { edge: 'left' })
-  })
-
-// Render recipe data
+// Render recipe
 export const renderRecipe = (recipe, recipeId) => {
   const html = `
     <div class="card-panel recipe white row" data-id="${recipeId}">
@@ -27,10 +13,10 @@ export const renderRecipe = (recipe, recipeId) => {
     </div>
     `
 
-  recipes.innerHTML += html
+  document.querySelector('.recipes').innerHTML += html
 }
 
-// Remove deleted recipe data
+// Remove deleted recipe
 export const removeRecipe = recipeId => {
   const recipe = document.querySelector(`.recipe[data-id=${recipeId}]`)
   recipe.remove()

@@ -1,25 +1,27 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Food Ninja</title>
 
-  <!-- materialize icons, css & js -->
-  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link type="text/css" href="/css/styles.css" rel="stylesheet">
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-
-  <!-- PWA -->
-  <link rel="manifest" href="/manifest.json">
-  <script src="/js/app.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- iOS Support -->
   <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
-  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
-  <meta name="theme-color" content="#FFE1C4">
+  <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+  <meta name="theme-color" content="#aa7700">
+
+  <!-- Materialize -->
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet prefetch" href="/css/materialize.css">
+  <link rel="stylesheet prefetch" href="/css/styles.css">
+  <script src="/js/materialize.js"></script>
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json">
+  <script type="module" src="/js/ui.mjs"></script>
+  <script type="module" src="/js/app.mjs" defer></script>
 </head>
 
 <body class="grey lighten-4">
@@ -53,8 +55,6 @@
     <p>Sorry, but you can't view this page in offline mode.</p>
     <a href="/" class="btn-small orange z-depth-0">Go to the Homepage</a>
   </div>
-
-  <script type="module" src="/js/ui.js"></script>
 </body>
 
 </html>
