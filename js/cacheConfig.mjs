@@ -1,3 +1,7 @@
+const firebaseVersion = '9.19.1'
+const firebaseUrlPrefix = 'https://www.gstatic.com/firebasejs/'
+const firebaseUrl = `${firebaseUrlPrefix}${firebaseVersion}`
+
 const requestFor = fileTypes => req => fileTypes.filter(fType => req.url.indexOf(fType) > -1).length > 0
 const isImageRequest = requestFor(['.png', '.jpg', '.jpeg', '.gif', '.ico'])
 const isHtmlRequest = requestFor(['.html', '.htm'])
@@ -60,8 +64,8 @@ export const staticAssets = [
   '/js/uiEventHandlers.mjs',
   '/js/db.mjs',
   '/js/app.mjs',
-  'https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js',
-  'https://www.gstatic.com/firebasejs/9.19.0/firebase-firestore.js',
+  `${firebaseUrl}/firebase-app.js`,
+  `${firebaseUrl}/firebase-firestore.js`,
 
   // Images
   imgFallbackUrl,

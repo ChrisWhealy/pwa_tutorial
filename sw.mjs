@@ -8,7 +8,7 @@ import {
 } from '/js/cacheConfig.mjs'
 
 const appName = 'food-ninja'
-const appVersion = 'v1'
+const appVersion = 'v2'
 
 const staticCacheName = genStaticCacheName(appName, appVersion)
 const dynamicCacheName = genDynamicCacheName(appName, appVersion)

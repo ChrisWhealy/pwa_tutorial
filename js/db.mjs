@@ -1,6 +1,8 @@
-const firebaseUrl = 'https://www.gstatic.com/firebasejs/'
-const firebaseVersion = '9.19.0'
-const firebaseFirestore = `${firebaseUrl}${firebaseVersion}/firebase-firestore.js`
+const firebaseVersion = '9.19.1'
+const firebaseUrlPrefix = 'https://www.gstatic.com/firebasejs/'
+const firebaseUrl = `${firebaseUrlPrefix}${firebaseVersion}`
+
+const firebaseFirestore = `${firebaseUrl}/firebase-firestore.js`
 const jsUi = '/js/uiEventHandlers.mjs'
 
 export const snapshotHandler = async snapshot => {

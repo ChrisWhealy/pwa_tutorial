@@ -81,13 +81,12 @@
 
   <script type="module">
     (async () => {
-      const firebaseUrl = 'https://www.gstatic.com/firebasejs/'
-      const firebaseVersion = '9.19.0'
-      const firebaseApp = `${firebaseUrl}${firebaseVersion}/firebase-app.js`
-      const firebaseFirestore = `${firebaseUrl}${firebaseVersion}/firebase-firestore.js`
+      const firebaseVersion = '9.19.1'
+      const firebaseUrlPrefix = 'https://www.gstatic.com/firebasejs/'
+      const firebaseUrl = `${firebaseUrlPrefix}${firebaseVersion}`
 
-      const { initializeApp, PersistentLocalCache } = await import(firebaseApp)
-      const { enableIndexedDbPersistence, onSnapshot, collection, initializeFirestore } = await import(firebaseFirestore)
+      const { initializeApp, PersistentLocalCache } = await import(`${firebaseUrl}/firebase-app.js`)
+      const { enableIndexedDbPersistence, onSnapshot, collection, initializeFirestore } = await import(`${firebaseUrl}/firebase-firestore.js`)
       const { snapshotHandler, addRecipeHandler, deleteRecipeHandler } = await import('/js/db.mjs')
 
       const firebaseConfig = {
