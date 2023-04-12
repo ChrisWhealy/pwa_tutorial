@@ -5,10 +5,10 @@ const firebaseUrl = `${firebaseUrlPrefix}${firebaseVersion}`
 const firebaseFirestore = `${firebaseUrl}/firebase-firestore.js`
 const jsUi = '/js/uiEventHandlers.mjs'
 
-export const snapshotHandler = async snapshot => {
+export const snapshotHandler = async () => {
   const { renderRecipe, removeRecipe } = await import(jsUi)
 
-  snapshot
+  return snapshot => snapshot
     .docChanges()
     .forEach(changed => {
       switch (changed.type) {

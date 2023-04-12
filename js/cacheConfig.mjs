@@ -14,11 +14,15 @@ export const genDynamicCacheName = genCacheOfType('dynamic')
 
 export const dynamicCacheLimit = 20
 
-export const noCacheUrlFragments = [
+const noCacheUrlFragments = [
   'google.firestore',
   'firestore.googleapis.com',
   '/images/cleardot.gif',
 ]
+export const requestIsCacheable = req =>
+  noCacheUrlFragments
+    .filter(urlFragment => req.url.indexOf(urlFragment) !== -1)
+    .length === 0
 
 const htmlFallbackUrl = '/pages/fallback.html'
 const imgFallbackUrl = '/img/image-missing.png'

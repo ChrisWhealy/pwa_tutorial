@@ -105,7 +105,7 @@
       })
 
       // Register snapshot handler
-      onSnapshot(collection(db, 'recipes'), snapshotHandler)
+      onSnapshot(collection(db, 'recipes'), snapshotHandler())
 
       // Event handlers for recipe actions
       document.getElementById('add-recipe').addEventListener('submit', addRecipeHandler(db))

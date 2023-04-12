@@ -1,6 +1,6 @@
 import {
   dynamicCacheLimit,
-  noCacheUrlFragments,
+  requestIsCacheable,
   staticAssets,
   genStaticCacheName,
   genDynamicCacheName,
@@ -8,7 +8,7 @@ import {
 } from '/js/cacheConfig.mjs'
 
 const appName = 'food-ninja'
-const appVersion = 'v2'
+const appVersion = 'v1'
 
 const staticCacheName = genStaticCacheName(appName, appVersion)
 const dynamicCacheName = genDynamicCacheName(appName, appVersion)
@@ -89,7 +89,7 @@ self.addEventListener('activate', evt => {
 self.addEventListener('fetch', async evt => {
   let logMsg = genEventMsg(evt)
 
-  if (noCacheUrlFragments.filter(urlFragment => evt.request.url.indexOf(urlFragment) !== -1).length === 0) {
+  if (requestIsCacheable(evt.request)) {
     evt.respondWith(
       (async () => {
         logMsg += "Static Cache : "
